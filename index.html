@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>QC Name Timestamp Checker - LifeGuru.in</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <main class="app">
+      <header class="hero">
+        <div>
+          <p class="eyebrow">LifeGuru.in - QC Studio</p>
+          <h1>Verify YouTube timestamps.</h1>
+          <p class="subtitle">
+            Upload Excel with names and YouTube links, watch inline, and mark pass/fail.
+          </p>
+        </div>
+        <div class="hero-card">
+          <div class="hero-card__title">Quick Status</div>
+          <div class="hero-card__grid">
+            <div>
+              <div class="hero-card__label">Total</div>
+              <div id="statRows" class="hero-card__value">0</div>
+            </div>
+            <div>
+              <div class="hero-card__label">Current</div>
+              <div id="statCurrent" class="hero-card__value">-</div>
+            </div>
+            <div>
+              <div class="hero-card__label">Status</div>
+              <div id="statStatus" class="hero-card__value">-</div>
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <section class="panel">
+        <form id="uploadForm" class="form-grid">
+          <label class="field">
+            <span>Excel File (Col A: Name, Col B: Link)</span>
+            <input id="excelFile" type="file" accept=".xlsx,.xls" required />
+          </label>
+          <div class="form-actions">
+            <button class="primary" type="submit">Load List</button>
+            <button id="exportBtn" type="button" class="ghost">Export CSV</button>
+          </div>
+        </form>
+
+        <div class="toolbar">
+          <div class="toolbar-group">
+            <button id="prevBtn" class="ghost" type="button">Prev</button>
+            <button id="nextBtn" class="ghost" type="button">Next</button>
+            <button id="autoBtn" class="primary" type="button">Auto-play</button>
+            <button id="stopBtn" class="ghost" type="button" style="display: none;">Stop</button>
+          </div>
+          <div class="toolbar-group">
+            <label class="inline-field">
+              <span>Play duration (sec)</span>
+              <select id="playDuration">
+                <option value="3">3</option>
+                <option value="5">5</option>
+                <option value="8" selected>8</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </label>
+          </div>
+        </div>
+      </section>
+
+      <div class="player-section">
+        <div class="player-frame">
+          <div id="player"></div>
+        </div>
+        <div class="player-info">
+          <div class="player-info__name" id="currentName">No video loaded</div>
+          <div class="player-info__qc">
+            <div class="radio-group">
+              <label class="radio-label">
+                <input type="radio" name="currentStatus" value="" checked />
+                <span>Pending</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="currentStatus" value="pass" />
+                <span>Pass</span>
+              </label>
+              <label class="radio-label">
+                <input type="radio" name="currentStatus" value="fail" />
+                <span>Fail</span>
+              </label>
+            </div>
+            <input id="currentNote" class="note-input" placeholder="Notes" />
+          </div>
+        </div>
+      </div>
+
+      <section class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Name</th>
+              <th>Timestamp</th>
+              <th>QC</th>
+              <th>Notes</th>
+            </tr>
+          </thead>
+          <tbody id="rows"></tbody>
+        </table>
+      </section>
+      
+      <footer class="footer">
+        <p>Powered by <strong>LifeGuru.in</strong></p>
+      </footer>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
