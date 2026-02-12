@@ -359,9 +359,8 @@ exportBtn.addEventListener("click", () => {
 window.addEventListener("beforeunload", (event) => {
   // Only warn if there's actual work done
   if (entries.length > 0 || Object.keys(qcData).length > 0) {
-    const message = "⚠️ Warning: If you refresh or leave this page, you will lose all your work! Make sure to export your results before leaving.";
     event.preventDefault();
-    event.returnValue = message; // For older browsers
-    return message;
+    event.returnValue = ""; // Modern browsers require empty string
+    return ""; // Return value to trigger the warning
   }
 });
